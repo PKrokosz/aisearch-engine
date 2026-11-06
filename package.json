@@ -1,0 +1,28 @@
+{
+  "name": "aisearch",
+  "version": "1.0.0",
+  "description": "AiSearch — zamknięty ekosystem wyszukiwania dla agentów (mózg: plan→resolve→falsify→learn) + przeglądarka Obscura (ręce: V8, interakcje, render). Zero zależności runtime.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/mcp/server.mjs",
+  "bin": {
+    "aisearch": "src/mcp/server.mjs"
+  },
+  "engines": {
+    "node": ">=20",
+    "python": ">=3.11"
+  },
+  "scripts": {
+    "start": "node src/mcp/server.mjs",
+    "http": "node src/http/server.mjs",
+    "bridge": "node src/http/bridge.mjs",
+    "dashboard": "node src/engine/dashboard-cli.mjs",
+    "test": "npm run test:unit && npm run test:web && npm run test:py && npm run eval",
+    "test:unit": "node --test test/browser-render.test.mjs test/mcp-server.test.mjs test/http-server.test.mjs",
+    "test:web": "node --test test/web-foundation.test.mjs test/web-pipeline.test.mjs test/web-feedindex.test.mjs test/web-dashboard.test.mjs",
+    "test:py": "python src/sandbox/test_recipes.py && python src/sandbox/test_sessions.py",
+    "eval": "node scripts/web-eval.mjs --gate",
+    "eval:live": "node scripts/web-eval.mjs --live",
+    "syntax": "node scripts/check-syntax.mjs"
+  }
+}

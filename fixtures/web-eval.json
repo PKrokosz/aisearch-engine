@@ -1,0 +1,101 @@
+{
+  "recordedAt": "2026-10-29",
+  "note": "Nagrania z zywej sondy przez prawdziwy HTTPS. Determinizm = CI moze odtworzyc ten korpus bez sieci. Fragment dwoch kontrol (nieistniejacy rekord DNS, 404) zostal celowo zatrzymany: to sa przypadki, w ktorych POPRAWNA odpowiedzia to ZERO wynikow.",
+  "corpus": [
+    {
+      "query": "changelog PHP 8.4",
+      "plan": { "intents": ["changelog"] },
+      "inlineUrls": ["https://www.php.net/releases/8.4/en.php"],
+      "expect": { "domains": ["www.php.net"], "pathShapes": ["releases/:ver/:seg"] }
+    },
+    {
+      "query": "MDN If-None-Match header conditional request",
+      "plan": { "intents": ["official-docs"] },
+      "inlineUrls": ["https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match"],
+      "expect": { "domains": ["developer.mozilla.org"], "pathShapes": ["docs/Web/HTTP/Reference/Headers/:seg"] }
+    },
+    {
+      "query": "Node.js 22.11.0 LTS release notes",
+      "plan": { "intents": ["changelog"] },
+      "inlineUrls": ["https://nodejs.org/en/blog/release/v22.11.0"],
+      "expect": { "domains": ["nodejs.org"], "pathShapes": ["en/blog/release/:ver"] }
+    },
+    {
+      "query": "web feed wikipedia RSS atom",
+      "plan": { "intents": ["reference"] },
+      "inlineUrls": ["https://en.wikipedia.org/wiki/Web_feed"],
+      "expect": { "domains": ["en.wikipedia.org"], "pathShapes": ["wiki/:seg"] }
+    },
+    {
+      "query": "changelog nodejs CHANGELOG_V22.md",
+      "plan": { "intents": ["repo"] },
+      "inlineUrls": ["https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V22.md"],
+      "expect": { "domains": ["github.com"], "pathShapes": [":seg/:seg/blob/:seg/doc/changelogs/:seg"] }
+    },
+    {
+      "query": "CISA KEV catalog known exploited vulnerabilities",
+      "plan": { "intents": ["advisory"] },
+      "inlineUrls": ["https://catalog.cisa.gov/kev"],
+      "expectEmpty": true,
+      "_control": "nieistniejacy rekord DNS — poprawna odpowiedz to ZERO. Model zglosilby go z ta sama pewnoscia co dzialajacy URL (to zgadywanie zawiodlo w sondzie)."
+    },
+    {
+      "query": "nginx modern setting seohost docs",
+      "plan": { "intents": ["official-docs"] },
+      "inlineUrls": ["https://srv120794.seohost.com.pl/docs/nginx-modern-setting"],
+      "expectEmpty": true,
+      "_control": "404 + brak kopii Wayback. Kontrola halucynacji: zgadywanie musi zginac, nie przejsc."
+    }
+  ],
+  "responses": {
+    "https://www.php.net/releases/8.4/en.php": {
+      "status": 200,
+      "title": "PHP: PHP 8.4 Release Announcement"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match": {
+      "status": 301,
+      "location": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-None-Match"
+    },
+    "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-None-Match": {
+      "status": 200,
+      "title": "If-None-Match header - HTTP | MDN",
+      "description": "The If-None-Match HTTP request header makes the request conditional."
+    },
+    "https://nodejs.org/en/blog/release/v22.11.0": {
+      "status": 200,
+      "title": "Node.js — Node.js 22.11.0 (LTS)",
+      "description": "Node.js 22.11.0 release notes changelog"
+    },
+    "https://en.wikipedia.org/wiki/Web_feed": {
+      "status": 200,
+      "title": "Web feed - Wikipedia",
+      "description": "Web feed RSS Atom data format"
+    },
+    "https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V22.md": {
+      "status": 200,
+      "title": "CHANGELOG_V22.md - nodejs",
+      "description": "Node.js changelog v22"
+    },
+    "https://catalog.cisa.gov/kev": {
+      "status": 0,
+      "title": null,
+      "error": "getaddrinfo ENOTFOUND catalog.cisa.gov"
+    },
+    "https://srv120794.seohost.com.pl/docs/nginx-modern-setting": {
+      "status": 404,
+      "title": "Nie znaleziono — Piotr Krokosz"
+    },
+    "https://srv120794.seohost.com.pl/docs/nginx-modern-setting/": {
+      "status": 404,
+      "title": "Nie znaleziono — Piotr Krokosz"
+    },
+    "https://archive.org/wayback/available?url=https%3A%2F%2Fsrv120794.seohost.com.pl%2Fdocs%2Fnginx-modern-setting": {
+      "status": 200,
+      "json": {}
+    },
+    "https://archive.org/wayback/available?url=https%3A%2F%2Fcatalog.cisa.gov%2Fkev": {
+      "status": 200,
+      "json": {}
+    }
+  }
+}

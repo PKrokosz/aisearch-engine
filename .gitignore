@@ -1,0 +1,23 @@
+# ── runtime / sekrety ─────────────────────────────────────────────
+.env
+node_modules/
+__pycache__/
+*.pyc
+
+# ── stan silnika (gitignored — nie commitujemy uczenia się w locie) ──
+.cache/
+
+# ── binaria Obscury (pobierz z GitHub Releases, NIE z gita) ─────────
+bin/*.exe
+bin/obscura*
+bin/*.zip
+
+# ── raporty testów E2E ────────────────────────────────────────────
+*-report.json
+e2e-report.json
+
+# ── edytory / OS ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
