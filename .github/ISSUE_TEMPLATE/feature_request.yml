@@ -1,0 +1,25 @@
+name: Feature request
+description: Propozycja dla ekosystemu (nie bug)
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Jaki problem to rozwiązuje
+      description: Jeden akapit. Co dziś boli lub kosztuje za drogo?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Propozycja
+      description: Co nowe ma robić i w której warstwie (engine/browser/mcp/http/sandbox).
+    validations:
+      required: true
+  - type: dropdown
+    id: breaks
+    attributes:
+      label: Czy rusza determinizm replay lub licznik redirectów (drift)?
+      options: [nie wiem, nie, tak — omówmy]
+    validations:
+      required: true

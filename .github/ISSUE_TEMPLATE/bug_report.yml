@@ -1,0 +1,25 @@
+name: Bug report
+description: Coś nie działa (wynik, test, bramka)
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Co się stało
+      description: Zachowanie, komunikat błędu, ślad (web.trace / narrate), wersja Node/Python.
+    validations:
+      required: true
+  - type: input
+    id: repro
+    attributes:
+      label: Minimalny repro
+      description: Jedno wywołanie (MCP tools/call, curl, launch.py --recipe ...).
+    validations:
+      required: false
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Warstwa
+      options: [engine (plan/resolve/falsify/learn), browser (render/Obscura), mcp, http/bridge, sandbox (Python), tests/eval]
+    validations:
+      required: true

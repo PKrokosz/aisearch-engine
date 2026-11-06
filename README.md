@@ -1,9 +1,21 @@
 # AiSearch — zamknięty ekosystem wyszukiwania + przeglądarka dla agentów
 
-Model **zgaduje** adresy, HTTP je **weryfikuje i naprawia**. Nic nie jest prawdą,
-dopóki serwer tego nie potwierdzi. Tam gdzie tekst się nie przewija (JS, SPA),
-interweniuje przeglądarka (**Obscura**, V8) — a mózg (scoring, nauka, werdykt)
-zawsze zostaje po stronie silnika.
+<p align="center">
+  <strong>Model zgaduje adresy. HTTP je weryfikuje i naprawia. Nic nie jest prawdą, dopóki serwer tego nie potwierdzi.</strong>
+</p>
+
+<p align="center">
+  <img alt="CI" src="https://github.com/PKrokosz/aisearch-engine/actions/workflows/ci.yml/badge.svg">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
+  <img alt="node" src="https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg">
+  <img alt="python" src="https://img.shields.io/badge/python-%3E%3D3.11-blue.svg">
+  <img alt="deps" src="https://img.shields.io/badge/runtime%20deps-0-brightgreen.svg">
+  <img alt="tests" src="https://img.shields.io/badge/tests-78-brightgreen.svg">
+  <img alt="eval gate" src="https://img.shields.io/badge/eval%20gate-PASS-success.svg">
+  <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+</p>
+
+Zamknięty ekosystem wyszukiwania dla agentów AI: **plan → propose → resolve → falsify → [SERP] → learn**, z autokorektorem (redirect/Wayback), trzema cache'ami, feedami, nauką źródeł i detektorem driftu dokumentacji. Tam gdzie tekst się nie przewija (JS, SPA), wchodzi przeglądarka **Obscura** (V8) — a werdykt zawsze zostaje po stronie silnika. Jeden serwer MCP, trzy wejścia (MCP/HTTP/CLI), zero zależności runtime.
 
 To nie jest kopia ani „jeszcze jeden wrapper". To **synteza dwóch dojrzałych
 podejść** w jednym czystym repo:

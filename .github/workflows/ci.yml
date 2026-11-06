@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # 1. Bramka składni (node --check + py_compile, bez sieci)
+      - name: Syntax gate
+        run: node scripts/check-syntax.mjs
+
+      # 2. Testy rdzenia silnika + warstw (offline; stos Obscury = stub)
+      - name: Engine tests
+        run: npm run test:web
+
+      - name: Unit tests (browser, MCP, HTTP)
+        run: npm run test:unit
+
+      # 3. Sandbox Python (receptury, sesje, launcher)
+      - name: Python sandbox tests
+        run: npm run test:py
+
+      # 4. Bramka jakości: ewaluacja replay + regresja (deterministyczna)
+      - name: Eval gate (replay)
+        run: npm run eval
